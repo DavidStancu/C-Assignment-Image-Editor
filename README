@@ -1,0 +1,50 @@
+//Copyright David-Ioan Stancu 312CAb 2023-2024
+
+image_editor.c
+Aceasta tema incearca sa creeze un editor functional, folosind diverse functii precum LOAD, SELECT, SAVE, si altele.
+
+I. Comanda LOAD
+- dupa ce citesc de la terminal LOAD, voi citi numele imaginii pe care vreau sa o incarc
+- daca exista un fisier citibil cu numele cerut, il voi incarca
+- citesc din el principalele informatii, adica tipul, dimensiunile si nuanta maxima de culoare pe care o poate lua un pixel
+- daca fisierul este de tip PPM (lucru care il observ din tipul fisierului), il voi nota intr-o variabila separata
+- daca fisierul este de tip ASCII, voi incarca pixelii imaginii, in mod normal, intr-0 matrice alocata dinamic
+- daca fisierul este de tip binar, ma voi folosi de o variabila de tip unsigned char pentru a memora valoarea/valorile fiecarui pixel
+    si in felul acesta voi salva valorile pixelilor in matrice pentru a fi folosite mai tarziu
+
+II. Comanda SAVE
+- initial incarc numele fisierului in care vreau sa salvez imaginea
+- incarc imformatiile imaginii(tipul ei, dimensiune si nuanta maxima a culorii)
+- daca dupa numele fisierului acesta este urmat de cuvantul "ascii", imaginea va fi incarcata in format ASCII, indiferent de formatul initial
+- daca dupa numele fisierului nu se gaseste cuvantul "ascii", imaginea va fi incarcata in format binar, indiferent de formatul initial
+- informatiile imaginii se vor pastra pentru viitoare operatii
+
+III. Comanda SELECT
+- dupa ce citesc comanda SELECT de la terminal, voi avea nevoie de 4 variabile pe care le voi lua dintr-un string
+- aceste variabile vor reprezenta o regiune de interes din interiorul imaginii pentru viitoare operatii
+- daca in loc de 4 valori, se afla in interiorul stringului cuvantul ALL, regiunea de interes devine toata imaginea
+
+IV. Comanda HISTOGRAM (exclusiv pentru imagine alb-negru)
+- dupa citirea comenzii HISTOGRAM de la terminal, voi lua 2 numere dintr-un string
+- aceste doua numere reprezinta numarul maxim de stele cu care poate fi afisata histograma, respectiv numarul de intervale
+    pe care se afiseaza valorile pixelilor din interiorul imaginii
+- cu aceste doua valori, creez o histograma in fisierul de output
+
+V. Comanda ROTATE
+- daca toata imaginea este selectata, aceasta operatie va roti intreaga imagine la 90/180/270/360 in stanga sau in dreapta, 
+    conform cerintei variabilei "angle"
+- daca doar o regiune este selectata(si regiunea respectiva este in forma de patrat!), comanda va roti regiunea respectiva
+    din cadrul imaginii
+
+VI. Comanda CROP
+- Aceasta vomanda va aduce regiunea selectata in prim-plan, aceasta devenind imaginea pe care se vor aplica comenzi in viitor
+
+VII. Comanda EQUALIZE (exclusiv imaginilor alb-negru)
+- aceasta comanda aduce actioneaza ca un fel de filtru pentru imagine, facand-o mai clara
+
+VIII. Comanda APPLY
+- in functie de filtrul selectat, APPLY va pune un filtru pe imagine sau sectiunea din imagine
+- aceasta comanda nu are un efect asupra imaginii grayscale
+
+IX. Comanda EXIT
+- face dealocarile de memorie necesare si opreste programul
